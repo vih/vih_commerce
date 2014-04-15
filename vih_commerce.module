@@ -1,0 +1,11 @@
+<?php
+/**
+ * @file
+ * Code for the VIH Commerce feature.
+ */
+
+include_once 'vih_commerce.features.inc';
+/**
+ * @file
+ * Code for the VIH Commerce feature.
+ */
