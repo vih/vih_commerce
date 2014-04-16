@@ -5,7 +5,43 @@
  */
 
 include_once 'vih_commerce.features.inc';
+
 /**
- * @file
- * Code for the VIH Commerce feature.
+ * Checks whether event has expired
  */
+function _vih_commerce_is_expired($entity) {
+  $course_is_expired = FALSE;
+
+  // Checking for expired course.
+  if (!empty($entity->field_course_time[LANGUAGE_NONE][0]['value2'])) {
+    $timezone = $entity->field_course_time[LANGUAGE_NONE][0]['timezone'];
+    $timezone_db = $entity->field_course_time[LANGUAGE_NONE][0]['timezone_db'];
+    $time = $entity->field_course_time[LANGUAGE_NONE][0]['value2'] . ' ' . $timezone_db;
+    $course_time = format_date(strtotime($time), 'custom', 'Y-m-d H:i:s', $timezone);
+  }
+  elseif (!empty($entity->field_date[LANGUAGE_NONE][0]['value2'])) {
+    $timezone = $entity->field_date[LANGUAGE_NONE][0]['timezone'];
+    $timezone_db = $entity->field_date[LANGUAGE_NONE][0]['timezone_db'];
+    $time = $entity->field_date[LANGUAGE_NONE][0]['value2'] . ' ' . $timezone_db;
+    $course_time = format_date(strtotime($time), 'custom', 'Y-m-d H:i:s', $timezone);
+  }
+  return ($course_is_expired = (strtotime($course_time) < time()));
+}
+
+/**
+ * Checks whether event is out of stock
+ */
+function _vih_commerce_is_out_of_stock($product_id) {
+  if (module_exists('commerce_stock')) {
+    $product = commerce_product_load($product_id);
+    $product_wrapper = entity_metadata_wrapper('commerce_product', $product);
+    if (isset($product_wrapper->commerce_stock) ){
+      if (!(isset($product_wrapper->commerce_stock_override) && $product_wrapper->commerce_stock_override->value() == 1)) {
+        if ($product_wrapper->commerce_stock->value() <= 0) {
+          return TRUE;
+        }
+      }
+    }
+  }
+  return FALSE;
+}
