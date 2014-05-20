@@ -7,6 +7,13 @@
 include_once 'vih_commerce.features.inc';
 
 /**
+ * Checks whether event is published
+ */
+function _vih_commerce_is_published($entity) {
+  return ($entity->status == 1);
+}
+
+/**
  * Checks whether event has expired
  */
 function _vih_commerce_is_expired($entity) {
