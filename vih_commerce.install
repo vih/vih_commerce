@@ -1,0 +1,8 @@
+<?php
+/**
+ * Implements hook_update_N().
+ * Enable Commerce Discount.
+ */
+function vih_commerce_update_7000() {
+  module_enable(array('commerce_discount'));
+}
