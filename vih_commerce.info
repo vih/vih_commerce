@@ -35,5 +35,3 @@ features[field_base][] = commerce_total
 features[field_base][] = commerce_unit_price
 features[field_instance][] = commerce_customer_profile-billing-commerce_customer_address
 features[views_view][] = vih_shopping_cart_summary
-features[views_view][] = vih_short_course_orders
-features_exclude[dependencies][views] = views
