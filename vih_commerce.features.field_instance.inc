@@ -21,6 +21,7 @@ function vih_commerce_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'addressfield',
         'settings' => array(
+          'default_country' => 'site_default',
           'format_handlers' => array(
             0 => 'address',
           ),
