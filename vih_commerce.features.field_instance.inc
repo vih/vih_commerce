@@ -65,6 +65,7 @@ function vih_commerce_field_default_field_instances() {
     'widget' => array(
       'module' => 'addressfield',
       'settings' => array(
+        'default_country' => 'site_default',
         'available_countries' => array(),
         'format_handlers' => array(
           0 => 'address',
