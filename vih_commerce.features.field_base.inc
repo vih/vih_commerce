@@ -19,7 +19,6 @@ function vih_commerce_field_default_field_bases() {
       0 => 'commerce_customer_profile',
     ),
     'field_name' => 'commerce_customer_address',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'addressfield',
@@ -37,7 +36,6 @@ function vih_commerce_field_default_field_bases() {
       0 => 'commerce_order',
     ),
     'field_name' => 'commerce_customer_billing',
-    'foreign keys' => array(),
     'indexes' => array(
       'profile_id' => array(
         0 => 'profile_id',
@@ -62,7 +60,6 @@ function vih_commerce_field_default_field_bases() {
       0 => 'commerce_line_item',
     ),
     'field_name' => 'commerce_display_path',
-    'foreign keys' => array(),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -86,7 +83,6 @@ function vih_commerce_field_default_field_bases() {
       0 => 'commerce_order',
     ),
     'field_name' => 'commerce_line_items',
-    'foreign keys' => array(),
     'indexes' => array(
       'line_item_id' => array(
         0 => 'line_item_id',
@@ -108,7 +104,6 @@ function vih_commerce_field_default_field_bases() {
       0 => 'commerce_order',
     ),
     'field_name' => 'commerce_order_total',
-    'foreign keys' => array(),
     'indexes' => array(
       'currency_price' => array(
         0 => 'amount',
@@ -131,7 +126,6 @@ function vih_commerce_field_default_field_bases() {
       0 => 'commerce_product',
     ),
     'field_name' => 'commerce_price',
-    'foreign keys' => array(),
     'indexes' => array(
       'currency_price' => array(
         0 => 'amount',
@@ -154,7 +148,6 @@ function vih_commerce_field_default_field_bases() {
       0 => 'commerce_line_item',
     ),
     'field_name' => 'commerce_product',
-    'foreign keys' => array(),
     'indexes' => array(
       'product_id' => array(
         0 => 'product_id',
@@ -178,7 +171,6 @@ function vih_commerce_field_default_field_bases() {
       0 => 'commerce_product',
     ),
     'field_name' => 'commerce_stock',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'number',
@@ -196,7 +188,6 @@ function vih_commerce_field_default_field_bases() {
       0 => 'commerce_line_item',
     ),
     'field_name' => 'commerce_total',
-    'foreign keys' => array(),
     'indexes' => array(
       'currency_price' => array(
         0 => 'amount',
@@ -219,7 +210,6 @@ function vih_commerce_field_default_field_bases() {
       0 => 'commerce_line_item',
     ),
     'field_name' => 'commerce_unit_price',
-    'foreign keys' => array(),
     'indexes' => array(
       'currency_price' => array(
         0 => 'amount',

@@ -10,7 +10,8 @@
 function vih_commerce_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'commerce_customer_profile-billing-commerce_customer_address'
+  // Exported field_instance:
+  // 'commerce_customer_profile-billing-commerce_customer_address'
   $field_instances['commerce_customer_profile-billing-commerce_customer_address'] = array(
     'bundle' => 'billing',
     'default_value' => NULL,
@@ -65,8 +66,8 @@ function vih_commerce_field_default_field_instances() {
     'widget' => array(
       'module' => 'addressfield',
       'settings' => array(
-        'default_country' => 'site_default',
         'available_countries' => array(),
+        'default_country' => 'site_default',
         'format_handlers' => array(
           0 => 'address',
           1 => 'name-oneline',
