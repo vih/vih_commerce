@@ -7,6 +7,14 @@
 include_once 'vih_commerce.features.inc';
 
 /**
+ * Implements hook_commerce_currency_info_alter().
+ */
+function vih_commerce_commerce_currency_info_alter(&$currencies, $langcode) {
+  $currencies['DKK']['thousands_separator'] = '.';
+  $currencies['DKK']['decimal_separator'] = ',';
+}
+
+/**
  * Checks whether event is published
  */
 function _vih_commerce_is_published($entity) {
