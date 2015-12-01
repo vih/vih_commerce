@@ -42,5 +42,6 @@ features[field_base][] = commerce_stock
 features[field_base][] = commerce_total
 features[field_base][] = commerce_unit_price
 features[field_instance][] = commerce_customer_profile-billing-commerce_customer_address
+features[views_view][] = vih_order_payments
 features[views_view][] = vih_product_stock
 features[views_view][] = vih_shopping_cart_summary

@@ -11,6 +11,211 @@ function vih_commerce_views_default_views() {
   $export = array();
 
   $view = new view();
+  $view->name = 'vih_order_payments';
+  $view->description = 'Display and total an order\'s payment transaction history.';
+  $view->tag = 'commerce';
+  $view->base_table = 'commerce_payment_transaction';
+  $view->human_name = 'VIH Order payments';
+  $view->core = 0;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Defaults */
+  $handler = $view->new_display('default', 'Defaults', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'mere';
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'view payments';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Udfør';
+  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Gendan';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sortér efter';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Stigende';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Faldende';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'status' => 'status',
+    'created' => 'created',
+    'payment_method' => 'payment_method',
+    'remote_id' => 'remote_id',
+    'message' => 'message',
+    'amount' => 'amount',
+    'operations' => 'operations',
+  );
+  $handler->display->display_options['style_options']['default'] = 'created';
+  $handler->display->display_options['style_options']['info'] = array(
+    'status' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => 'views-align-center',
+      'separator' => '',
+    ),
+    'created' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => 'views-align-left',
+      'separator' => '',
+    ),
+    'payment_method' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => 'views-align-left',
+      'separator' => '',
+    ),
+    'remote_id' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => 'views-align-left',
+      'separator' => '',
+    ),
+    'message' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => 'views-align-left',
+      'separator' => '',
+    ),
+    'amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => 'views-align-right',
+      'separator' => '',
+    ),
+    'operations' => array(
+      'align' => 'views-align-left',
+      'separator' => '',
+    ),
+  );
+  /* Footer: Commerce Payment Transaction: Totals */
+  $handler->display->display_options['footer']['totals']['id'] = 'totals';
+  $handler->display->display_options['footer']['totals']['table'] = 'commerce_payment_transaction';
+  $handler->display->display_options['footer']['totals']['field'] = 'totals';
+  $handler->display->display_options['footer']['totals']['empty'] = TRUE;
+  $handler->display->display_options['footer']['totals']['add_payment_form'] = 1;
+  /* Field: Commerce Payment Transaction: Created date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'commerce_payment_transaction';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Date';
+  $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'm/d/Y';
+  /* Field: Commerce Order: Order ID */
+  $handler->display->display_options['fields']['order_id']['id'] = 'order_id';
+  $handler->display->display_options['fields']['order_id']['table'] = 'commerce_order';
+  $handler->display->display_options['fields']['order_id']['field'] = 'order_id';
+  $handler->display->display_options['fields']['order_id']['link_to_order'] = 'admin';
+  /* Field: Commerce Payment Transaction: Status */
+  $handler->display->display_options['fields']['status']['id'] = 'status';
+  $handler->display->display_options['fields']['status']['table'] = 'commerce_payment_transaction';
+  $handler->display->display_options['fields']['status']['field'] = 'status';
+  /* Field: Commerce Payment Transaction: Payment method */
+  $handler->display->display_options['fields']['payment_method']['id'] = 'payment_method';
+  $handler->display->display_options['fields']['payment_method']['table'] = 'commerce_payment_transaction';
+  $handler->display->display_options['fields']['payment_method']['field'] = 'payment_method';
+  $handler->display->display_options['fields']['payment_method']['label'] = 'Method';
+  /* Field: Commerce Payment Transaction: Remote ID */
+  $handler->display->display_options['fields']['remote_id']['id'] = 'remote_id';
+  $handler->display->display_options['fields']['remote_id']['table'] = 'commerce_payment_transaction';
+  $handler->display->display_options['fields']['remote_id']['field'] = 'remote_id';
+  $handler->display->display_options['fields']['remote_id']['empty'] = '-';
+  $handler->display->display_options['fields']['remote_id']['hide_alter_empty'] = FALSE;
+  /* Field: Commerce Payment Transaction: Message */
+  $handler->display->display_options['fields']['message']['id'] = 'message';
+  $handler->display->display_options['fields']['message']['table'] = 'commerce_payment_transaction';
+  $handler->display->display_options['fields']['message']['field'] = 'message';
+  $handler->display->display_options['fields']['message']['label'] = 'Result message';
+  $handler->display->display_options['fields']['message']['empty'] = '-';
+  /* Field: Commerce Payment Transaction: Amount */
+  $handler->display->display_options['fields']['amount']['id'] = 'amount';
+  $handler->display->display_options['fields']['amount']['table'] = 'commerce_payment_transaction';
+  $handler->display->display_options['fields']['amount']['field'] = 'amount';
+  /* Field: Commerce Payment Transaction: Operations links */
+  $handler->display->display_options['fields']['operations']['id'] = 'operations';
+  $handler->display->display_options['fields']['operations']['table'] = 'commerce_payment_transaction';
+  $handler->display->display_options['fields']['operations']['field'] = 'operations';
+  $handler->display->display_options['fields']['operations']['label'] = 'Operations';
+
+  /* Display: Blok */
+  $handler = $view->new_display('block', 'Blok', 'block_1');
+
+  /* Display: Content pane */
+  $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Afventende betalinger';
+  $handler->display->display_options['defaults']['use_more'] = FALSE;
+  $handler->display->display_options['use_more'] = TRUE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_text'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'mere';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'Der er i øjeblikket ingen afventende betalinger.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Commerce Order: Order ID */
+  $handler->display->display_options['filters']['order_id']['id'] = 'order_id';
+  $handler->display->display_options['filters']['order_id']['table'] = 'commerce_order';
+  $handler->display->display_options['filters']['order_id']['field'] = 'order_id';
+  $handler->display->display_options['filters']['order_id']['operator'] = '>';
+  $handler->display->display_options['filters']['order_id']['value']['value'] = '0';
+  /* Filter criterion: Commerce Payment Transaction: Status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'commerce_payment_transaction';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = array(
+    'pending' => 'pending',
+  );
+
+  /* Display: Side */
+  $handler = $view->new_display('page', 'Side', 'page_1');
+  $handler->display->display_options['path'] = 'admin/dashboard/registrations/payments';
+  $handler->display->display_options['menu']['type'] = 'tab';
+  $handler->display->display_options['menu']['title'] = 'Betalinger';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['context'] = 0;
+  $translatables['vih_order_payments'] = array(
+    t('Defaults'),
+    t('mere'),
+    t('Udfør'),
+    t('Gendan'),
+    t('Sortér efter'),
+    t('Stigende'),
+    t('Faldende'),
+    t('Date'),
+    t('Order ID'),
+    t('Status'),
+    t('Method'),
+    t('Remote ID'),
+    t('-'),
+    t('Result message'),
+    t('Amount'),
+    t('Operations'),
+    t('Blok'),
+    t('more'),
+    t('Content pane'),
+    t('Afventende betalinger'),
+    t('Der er i øjeblikket ingen afventende betalinger.'),
+    t('View panes'),
+    t('Side'),
+  );
+  $export['vih_order_payments'] = $view;
+
+  $view = new view();
   $view->name = 'vih_product_stock';
   $view->description = '';
   $view->tag = 'default';
