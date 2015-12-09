@@ -24,6 +24,7 @@ dependencies[] = features
 dependencies[] = number
 dependencies[] = text
 dependencies[] = views
+dependencies[] = views_content
 dependencies[] = views_send
 dependencies[] = vih_fields
 features[ctools][] = strongarm:strongarm:1

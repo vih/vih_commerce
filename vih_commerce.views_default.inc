@@ -406,9 +406,11 @@ function vih_commerce_views_default_views() {
   $handler->display->display_options['filters']['state']['id'] = 'state';
   $handler->display->display_options['filters']['state']['table'] = 'commerce_order';
   $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['operator'] = 'not in';
   $handler->display->display_options['filters']['state']['value'] = array(
-    'pending' => 'pending',
-    'completed' => 'completed',
+    'canceled' => 'canceled',
+    'cart' => 'cart',
+    'checkout' => 'checkout',
   );
   $handler->display->display_options['filters']['state']['expose']['label'] = 'Order state';
   $handler->display->display_options['filters']['state']['expose']['use_operator'] = TRUE;
@@ -425,8 +427,8 @@ function vih_commerce_views_default_views() {
   $handler->display->display_options['tab_options']['weight'] = '';
   $handler->display->display_options['tab_options']['name'] = 'management';
 
-  /* Display: Shopping carts */
-  $handler = $view->new_display('page', 'Shopping carts', 'shopping_carts');
+  /* Display: Shopping carts page */
+  $handler = $view->new_display('page', 'Shopping carts page', 'shopping_carts');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Shopping carts';
   $handler->display->display_options['defaults']['empty'] = FALSE;
@@ -456,8 +458,8 @@ function vih_commerce_views_default_views() {
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['context'] = 0;
 
-  /* Display: Content pane */
-  $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
+  /* Display: Admin current pane */
+  $handler = $view->new_display('panel_pane', 'Admin current pane', 'panel_pane_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Aktuelle ordrer';
   $handler->display->display_options['defaults']['use_more'] = FALSE;
@@ -493,9 +495,11 @@ function vih_commerce_views_default_views() {
   $handler->display->display_options['filters']['state']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
   $handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
+  $handler->display->display_options['pane_category']['name'] = 'VIH Admin';
+  $handler->display->display_options['pane_category']['weight'] = '0';
 
-  /* Display: Content pane 2 */
-  $handler = $view->new_display('panel_pane', 'Content pane 2', 'panel_pane_2');
+  /* Display: Admin untreated pane */
+  $handler = $view->new_display('panel_pane', 'Admin untreated pane', 'panel_pane_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Ubehandlede ordrer';
   $handler->display->display_options['defaults']['use_more'] = FALSE;
@@ -594,6 +598,8 @@ function vih_commerce_views_default_views() {
   $handler->display->display_options['filters']['state']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
   $handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
+  $handler->display->display_options['pane_category']['name'] = 'VIH Admin';
+  $handler->display->display_options['pane_category']['weight'] = '0';
   $translatables['vih_orders'] = array(
     t('Defaults'),
     t('Orders'),
@@ -623,12 +629,13 @@ function vih_commerce_views_default_views() {
     t('Order state'),
     t('Admin page'),
     t('more'),
+    t('Shopping carts page'),
     t('Shopping carts'),
     t('There are currently no shopping cart orders.'),
-    t('Content pane'),
+    t('Admin current pane'),
     t('Aktuelle ordrer'),
-    t('View panes'),
-    t('Content pane 2'),
+    t('VIH Admin'),
+    t('Admin untreated pane'),
     t('Ubehandlede ordrer'),
   );
   $export['vih_orders'] = $view;
